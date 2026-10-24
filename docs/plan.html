@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>미래학 체험관 기획·개발서</title>
+<meta name="description" content="미래학 체험 플랫폼의 기획 의도, 정보구조·UX, 기술 아키텍처, 계산 엔진 명세, 검증 결과와 배포 전략.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700;900&family=Spline+Sans+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="doc.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='20' fill='%230e1222'/%3E%3Cpath d='M24 6 L27 21 L42 24 L27 27 L24 42 L21 27 L6 24 L21 21 Z' fill='%23e7b45a'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="doc-top"><div class="in"><a class="home" href="../index.html">← 체험관</a><span class="t">기획·개발서</span><span class="sp"></span><a class="home" href="final-encyclopedia.html">최종 윤문판 →</a></div></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="kick">기획 · 개발 명세</div>
+    <h1>미래학 체험관 기획·개발서</h1>
+    <p class="sub">“사주처럼 전 세계 미래학을 체험”하되, 결과가 <strong>효용 있고 사실에 근거하며 삶에 도움</strong>이 되도록 설계한 플랫폼의 기획 의도·정보구조·기술 아키텍처·엔진 명세·검증·배포 문서.</p>
+    <div class="meta"><span>v1.0 · 2026</span><span>정적 웹 · 무백엔드 · 개인정보 비전송</span><span>GitHub Pages 배포</span></div>
+  </header>
+  <div class="layout">
+    <nav class="toc" aria-label="목차">
+      <h4>목차</h4>
+      <a href="#why">1. 배경과 목표</a>
+      <a href="#value">2. 가치 제안</a>
+      <a href="#scope">3. 체계 선정</a>
+      <a href="#ia">4. 정보구조·UX</a>
+      <a href="#arch">5. 기술 아키텍처</a>
+      <a href="#engine">6. 계산 엔진 명세</a>
+      <a href="#verify">7. 검증 결과</a>
+      <a href="#result">8. 결과 설계 원칙</a>
+      <a href="#privacy">9. 개인정보·윤리</a>
+      <a href="#deploy">10. 배포·운영</a>
+      <a href="#roadmap">11. 로드맵</a>
+    </nav>
+    <article>
+      <h2 id="why">1. 배경과 목표</h2>
+      <p class="lead">사람들은 사주·타로·별자리를 찾습니다. 재미 때문만이 아니라, <strong>자기 삶의 질문을 정리할 언어</strong>가 필요하기 때문입니다.</p>
+      <p>기존 운세 서비스의 문제는 둘입니다. ① 근거를 과장해 “정해진 운명”처럼 말하거나, ② 반대로 아무 내용 없이 모호합니다. 이 플랫폼의 목표는 <strong>세 번째 길</strong>입니다. 전통을 문화유산으로 존중하면서, 각 체계가 무엇을 보장하고 무엇은 보장하지 않는지를 <strong>근거등급으로 투명하게</strong> 밝히고, 결과를 <strong>삶에 적용 가능한 질문</strong>으로 바꿔 줍니다.</p>
+      <ul>
+        <li><strong>체험성:</strong> 아이콘을 누르면 실제 계산으로 결과가 나온다(가짜 랜덤 문구가 아니라 재현 가능한 명식·괘·차트).</li>
+        <li><strong>사실 기반:</strong> H·R·P·C·X 다섯 근거등급을 모든 결과에 표시한다.</li>
+        <li><strong>효용성:</strong> 모든 결과가 ‘대상·사건·기간·조건·확률·반증’ 6칸으로 연결되어 스스로 채점 가능한 예측이 된다.</li>
+      </ul>
+
+      <h2 id="value">2. 가치 제안 — “5천원 이상의 가치”</h2>
+      <p>단순 운세 한 줄이 아니라, 한 번의 체험에서 다음을 모두 제공합니다.</p>
+      <div class="table-scroll"><table>
+        <tr><th>구성</th><th>내용</th><th>가치</th></tr>
+        <tr><td>정확한 산출</td><td>만세력급 사주 명식, 64괘, 실제 태양황경 기반 별자리 등</td><td>재현 가능한 ‘진짜 계산’</td></tr>
+        <tr><td>구조 해설</td><td>오행 분포·십신·강약·조후, 괘의 체용·변괘, 시나리오 분기</td><td>나를 보는 구조적 언어</td></tr>
+        <tr><td>정직한 한계</td><td>근거등급·주의 고지로 과신을 막음</td><td>잘못된 결정 예방</td></tr>
+        <tr><td>삶의 적용</td><td>6칸 질문 + 되돌릴 수 있는 작은 시험 + 사후채점</td><td>실제 행동으로 연결</td></tr>
+      </table></div>
+
+      <h2 id="scope">3. 체계 선정</h2>
+      <p>원전 《미래예측 세계 대백과》의 <strong>41개 전통 + 현대 검증예측</strong> 전체를 ‘도감’으로 싣되, 실제 계산이 가능하고 개인이 바로 체험할 가치가 큰 <strong>11개를 대화형</strong>으로 구현했습니다.</p>
+      <div class="table-scroll"><table>
+        <tr><th>권역</th><th>대화형 체험(11)</th></tr>
+        <tr><td>동아시아</td><td>사주명리 · 주역 · 매화역수 · 띠(십이지)</td></tr>
+        <tr><td>서양·근동</td><td>서양 점성술 · 타로 · 룬 · 르노르망 · 수비학</td></tr>
+        <tr><td>현대·검증</td><td>생체리듬(참고) · 현대 미래예측(포사이트)</td></tr>
+      </table></div>
+      <p>자미두수·기문둔갑·조티샤 등 음력·정밀 천문 데이터가 필요한 체계는 도감으로 수록하고, 향후 데이터 확보 시 대화형으로 확장합니다(로드맵 참조).</p>
+
+      <h2 id="ia">4. 정보구조·UX</h2>
+      <ul>
+        <li><strong>허브(랜딩):</strong> 히어로 → 근거등급 인포그래픽 → 권역별 체험 아이콘 그리드 → 41개 도감 → 정직성 매니페스토.</li>
+        <li><strong>체험 패널(모달):</strong> 체계 소개 + 근거등급 배지 → 입력 폼(생년월일·질문 등) → ‘체험하기’ → 결과 카드.</li>
+        <li><strong>결과 카드:</strong> 핵심 요약 → 산출 비주얼(명식표/괘/막대/카드) → 구조 해설 → <strong>삶에 적용(6칸)</strong> → 주의 고지 → 다시/요약복사.</li>
+        <li><strong>딥링크:</strong> <code>#saju</code> 등 해시로 특정 체험을 바로 열 수 있음.</li>
+        <li><strong>테마:</strong> 라이트/다크 자동 + 토글(기억). 모바일 1열 반응형, 가로 스크롤 없음.</li>
+      </ul>
+      <p>디자인 언어: 밤하늘 남색 바탕 · 호박색(별·동양) 강조 · 청록(현대·과학) 보조 · 오행 5색. 제목 Noto Serif KR, 본문 Noto Sans KR, 데이터 모노.</p>
+
+      <h2 id="arch">5. 기술 아키텍처</h2>
+      <p><strong>정적 웹앱(무백엔드).</strong> 빌드 단계 없이 브라우저에서 바로 동작하는 바닐라 JS. 모든 계산이 <strong>클라이언트에서만</strong> 수행되어 생년월일·질문 등 개인정보가 서버로 전송되지 않습니다.</p>
+      <div class="table-scroll"><table>
+        <tr><th>계층</th><th>파일</th><th>역할</th></tr>
+        <tr><td>천문·역법</td><td>engines/astro.js</td><td>율리우스일, 태양황경(Meeus), 절기 경계</td></tr>
+        <tr><td rowspan="5">엔진</td><td>engines/saju.js</td><td>사주 명식·지장간·십신·오행·강약·대운</td></tr>
+        <tr><td>engines/iching.js · plum.js</td><td>주역 동전점 · 매화역수 체용</td></tr>
+        <tr><td>engines/western.js · zodiac.js</td><td>태양 별자리 · 십이지 관계</td></tr>
+        <tr><td>engines/cards.js</td><td>시드 기반 셔플·추출(타로·룬·르노르망 공용)</td></tr>
+        <tr><td>engines/numerology · biorhythm · foresight</td><td>수비학 · 생체리듬 · 베이즈 포사이트</td></tr>
+        <tr><td>데이터</td><td>data/hexagrams · tarot · runes · lenormand</td><td>64괘·78타로·24룬·36르노르망</td></tr>
+        <tr><td>표현</td><td>evidence · systems · icons · readings · app</td><td>근거등급·레지스트리·SVG아이콘·해석생성·컨트롤러</td></tr>
+      </table></div>
+      <p>외부 의존성은 Google Fonts뿐이며 라이브러리 번들이 없습니다(경량·빠른 로드). 각 모듈은 브라우저 전역(<code>window.FL</code>)과 Node <code>require</code>를 모두 지원해 테스트가 쉽습니다.</p>
+
+      <h2 id="engine">6. 계산 엔진 명세 (핵심)</h2>
+      <h3>사주 — 만세력급 계산</h3>
+      <ul>
+        <li><strong>태양황경:</strong> Meeus 저정밀식(오차 ~0.01°)으로 절기 경계를 판정. 입춘(황경 315°)에서 寅월이 시작, 30°마다 다음 월지.</li>
+        <li><strong>연주:</strong> 입춘 경계 보정 후 (연−4) mod 60. <strong>월주:</strong> 월지=절기 섹터, 월간=오호둔(五虎遁).</li>
+        <li><strong>일주:</strong> 율리우스일 <code>JDN</code> 기준 <code>(JDN−11) mod 60</code> (0=甲子). <strong>시주:</strong> 시지=2시간 구간, 시간=오서둔(五鼠遁). 야자시 옵션 제공.</li>
+        <li><strong>파생:</strong> 지장간(본기·중기·여기) 가중 오행 분포, 일간 기준 십신, 월령 가중 강약(왕쇠), 조후, 억부 용신 후보, 대운 순·역·시작나이(3일=1년 근사).</li>
+      </ul>
+      <h3>주역·카드 — 재현 가능한 무작위</h3>
+      <p>동전점은 원시 결과(앞/뒤)를 기록하고, 카드는 <code>mulberry32</code> 시드 PRNG로 뽑아 <strong>시드를 결과에 표기</strong>합니다. “유리한 결과가 나올 때까지 다시 뽑지 않기”라는 원전 원칙을 기술로 보장합니다.</p>
+      <h3>현대 포사이트 — 베이즈 갱신</h3>
+      <p>기준율을 오즈로 변환 → 신호(약/중/강 = 우도비 1.5/2.3/3.5)로 곱셈 갱신 → 확률로 환산. 통제 가능성·신호 수에 따라 <strong>범위 폭</strong>을 조절하고, Dator의 4대 미래와 사후채점 설계를 함께 출력합니다.</p>
+
+      <h2 id="verify">7. 검증 결과</h2>
+      <p>엔진은 Node 환경에서 자동 검증했습니다(샘플).</p>
+      <div class="callout modern">
+        <ul style="margin:0">
+          <li>일주 앵커: <strong>1900-01-01 = 甲戌</strong>, 2000-01-01 = 戊午 — 공인 역법과 일치.</li>
+          <li>십신표: 일간 10×대상 10 전체가 원전 표와 <strong>완전 일치</strong>.</li>
+          <li>입춘 경계: 1984-02-03=癸亥년, 02-05=<strong>甲子년 丙寅월</strong> — 절기 경계 정확.</li>
+          <li>주역: 下巽/上坎 → <strong>水風井 48괘</strong>(원전 예제와 일치). 64괘 역룩업 무결.</li>
+          <li>별자리: 1995-08-10(황경 137°) → <strong>사자자리</strong>. 카드 시드 재현성 통과.</li>
+        </ul>
+      </div>
+
+      <h2 id="result">8. 결과 설계 원칙</h2>
+      <ol>
+        <li><strong>계산된 실제 값에 근거</strong>: 모든 서술은 산출된 명식·괘·차트의 구체 값에서 나온다. 막연한 운세 금지.</li>
+        <li><strong>상징과 현실의 분리</strong>: 상징 해석은 질문을 새로 보게 하는 힘으로, 현실 판단은 기준율·자료로.</li>
+        <li><strong>조건부 서술</strong>: “~하면 ~ 경향” 형태. 숙명·단정 금지.</li>
+        <li><strong>행동으로 연결</strong>: 6칸 + 되돌릴 수 있는 작은 시험 + 확인 날짜.</li>
+      </ol>
+
+      <h2 id="privacy">9. 개인정보·윤리</h2>
+      <ul>
+        <li><strong>비전송:</strong> 생년월일·질문은 브라우저에서만 처리되며 서버·제3자로 전송되지 않는다(무백엔드).</li>
+        <li><strong>저장 최소화:</strong> localStorage는 테마 설정 등 편의 값만. 체험 결과는 저장하지 않는다.</li>
+        <li><strong>안전 고지:</strong> 건강·법률·투자·생명 위험은 전통 해석 단독 근거 금지 문구를 결과마다 노출.</li>
+        <li><strong>차별 방지:</strong> 성별·직업·외모 고정관념을 상징으로 정당화하지 않는다.</li>
+      </ul>
+
+      <h2 id="deploy">10. 배포·운영</h2>
+      <p><strong>GitHub Pages</strong>로 정적 배포합니다. 저장소에 포함된 <code>.github/workflows/pages.yml</code>이 기본 브랜치 푸시 시 사이트를 게시합니다(저장소 설정에서 Pages 소스를 ‘GitHub Actions’로 지정). 단일 페이지 + 정적 자산이라 CDN 캐싱에 적합하고 서버 비용이 없습니다.</p>
+
+      <h2 id="roadmap">11. 로드맵</h2>
+      <div class="table-scroll"><table>
+        <tr><th>단계</th><th>내용</th></tr>
+        <tr><td>v1.1</td><td>지오맨시·토정비결 대화형 추가(비천문 체계 우선)</td></tr>
+        <tr><td>v1.2</td><td>음력 변환표 내장 → 자미두수·조티샤 다샤 대화형</td></tr>
+        <tr><td>v1.3</td><td>예측 기록·사후채점 저널(로컬 저장, 선택) — 개인 보정(calibration) 리포트</td></tr>
+        <tr><td>v2.0</td><td>다국어(영/중/일), 접근성 심화, 결과 PDF 내보내기</td></tr>
+      </table></div>
+
+      <div class="footer-note">
+        <p>© 2026 미래학 체험관 · Futures Lab. 본 문서는 플랫폼 소스와 함께 저장소에 포함됩니다.</p>
+        <p><a class="home" href="../index.html">← 체험관으로</a> · <a class="home" href="final-encyclopedia.html">최종 윤문판 백과 →</a></p>
+      </div>
+    </article>
+  </div>
+</div>
+</body>
+</html>

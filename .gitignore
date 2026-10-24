@@ -1,0 +1,8 @@
+# 검증 스크린샷(용량 큼, 재생성 가능)
+tools/*.png
+# 아티팩트 빌드 산출물
+docs/experience.artifact.html
+# OS/에디터
+.DS_Store
+*.log
+node_modules/
