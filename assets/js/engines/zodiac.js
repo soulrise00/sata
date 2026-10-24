@@ -44,11 +44,22 @@
     var b = yb.branch;
     var sam = SAMHAP.filter(function (g) { return g.indexOf(b) >= 0; })[0] || [];
     var samOthers = sam.filter(function (x) { return x !== b; });
+    // 올해 운세(세운): 올해 태세 지지와의 관계
+    var curY = new Date().getFullYear();
+    var curB = ((curY - 4) % 12 + 12) % 12;
+    var yf;
+    if (curB === b) yf = { label: '본명년(本命年)', text: '내 띠의 해 — 에너지가 강하지만 태세와 겹쳐 기복도 큽니다. 새로 벌이기보다 건강·안정을 챙기고, 붉은색 소품으로 기운을 북돋우는 전통이 있습니다.' };
+    else if (SAMHAP.some(function (g) { return g.indexOf(b) >= 0 && g.indexOf(curB) >= 0; })) yf = { label: '삼합의 해 — 大吉', text: '올해 태세와 삼합을 이뤄 귀인·협력·성취의 기운이 큽니다. 미뤄 둔 도전과 확장을 시도하기 좋은 해입니다.' };
+    else if (YUKHAP[b] === curB) yf = { label: '육합의 해 — 吉', text: '올해 태세와 육합 — 인연과 결속, 안정된 성과의 해입니다. 관계·계약에 특히 좋습니다.' };
+    else if (CHUNG[b] === curB) yf = { label: '충(沖)의 해 — 변동', text: '올해 태세와 충 — 변화·이동·전환이 큰 해입니다. 큰 계약·투자는 신중히, 다만 변화를 에너지로 쓰면 도약의 계기가 됩니다.' };
+    else yf = { label: '평운(平運)', text: '올해는 큰 충돌 없이 무난한 흐름입니다. 기본기를 다지고 꾸준히 쌓으면 좋은 해입니다.' };
+
     return {
       branch: b, han: BR[b], animal: ANIMALS[b], elem: ELEM[b], trait: TRAIT[b],
       solarYear: yb.solarYear,
       harmony: { samhap: samOthers.map(function (i) { return ANIMALS[i]; }), yukhap: ANIMALS[YUKHAP[b]] },
-      clash: ANIMALS[CHUNG[b]]
+      clash: ANIMALS[CHUNG[b]],
+      yearFortune: { year: curY, label: yf.label, text: yf.text }
     };
   }
 

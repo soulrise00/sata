@@ -15,15 +15,20 @@
 - **최종 윤문판 백과**: `docs/final-encyclopedia.html` · [Markdown](docs/미래예측_세계대백과_최종윤문판.md)
 - **기획·개발서**: `docs/plan.html` · [Markdown](docs/기획개발서.md)
 
-## 체험 가능한 체계 (11)
+## 체험 가능한 체계 (102개, 전부 동작)
 
-| 권역 | 체계 |
+| 카테고리 | 대표 체계 |
 |---|---|
-| 동아시아 | 사주명리 · 주역 · 매화역수 · 띠(십이지) |
-| 서양·근동 | 서양 점성술 · 타로 · 룬 · 르노르망 · 수비학 |
-| 현대·검증 | 생체리듬(참고) · 현대 미래예측(포사이트) |
+| 동아시아 명리 (18) | 사주명리·자미두수·구성기학·당사주·토정비결·띠·삼재·궁합·일진·택일·성명학·작명·기문둔갑·대육임·태을신수 |
+| 역·괘점 (8) | 주역·육효·매화역수·윷점·지오맨시·척전·하락이수·제비뽑기 |
+| 인도·티베트 (9) | 조티샤·나크샤트라·빔쇼타리 다샤·프라슈나·무후르타·아유르베다 도샤·나디·티베트·바스투 |
+| 서양 점성 (10) | 태양·달·상승점·데칸·호라리·행성시·24절기·솔라리턴·별자리 궁합·오늘의 운세 |
+| 카드·상징 (20) | 타로(3·켈틱·관계·예아니오·오늘·연간·커리어)·르노르망·룬·오검·이파·카토맨시·주사위·도미노·진자·모점·오라클 |
+| 수리·성명·상 (8) | 수비학·생일수·네임 수비학·게마트리아·카발라·궁합·관상·수상 |
+| 세계·토착 (8) | 마야 쫄킨·아즈텍·켈트 나무·네이티브 토템·요일점·그리스 신탁·조개점·호오포노포노 |
+| 현대·심리·검증 (21) | 포사이트·기준율·몬테카를로·시나리오 2×2·델파이·프리모템·SWOT·의사결정·리스크·교차영향·MBTI·에니어그램·DISC·사랑의 언어·생체리듬·혈액형·꿈해몽 |
 
-전체 **41개 전통 + 현대 검증예측**은 플랫폼의 ‘도감’과 최종 윤문판 백과에 수록되어 있습니다.
+모든 체계가 **클릭 즉시 실제 체험**(계산·상징 추출·설문·상담형 설계)으로 연결되며, 컬러풀한 아이콘·테마별 애니메이션·**고민 맞춤 설계**와 함께 제공됩니다. 원전 41개 전통의 상세 해설은 최종 윤문판 백과에 수록되어 있습니다.
 
 ## 기술
 
@@ -32,9 +37,10 @@
 - 사주 엔진은 Meeus 태양황경으로 절기 경계를 계산하는 **만세력급** 구현
 
 ```
-assets/js/engines/   astro saju iching plum western zodiac cards numerology biorhythm foresight
-assets/js/data/      hexagrams(64) tarot(78) runes(24) lenormand(36)
-assets/js/           evidence systems icons readings app
+assets/js/engines/   astro saju iching plum western numerology biorhythm zodiac foresight cards
+                     vedic mayan celtic chrono naming oracle profile guided relationship ziwei toe consult
+assets/js/data/      hexagrams(64) tarot(78) runes(24) lenormand(36) oracle profiles guided dream
+assets/js/           evidence systems icons visuals readings app
 docs/                final-encyclopedia.html plan.html + .md
 tools/               엔진·UI 검증 스크립트(Node/Playwright)
 ```

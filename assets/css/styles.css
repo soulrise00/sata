@@ -324,3 +324,101 @@ footer a:hover { text-decoration: underline; }
   .atlas { columns: 1; }
   .row-3 { grid-template-columns: 1fr 1fr; }
 }
+
+/* ===================== v2: 컬러풀 아이콘 · 애니메이션 · 신규 컴포넌트 ===================== */
+.sys-card .ico { width: 54px; height: 54px; border-radius: 15px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.18)); }
+.panel-head .ico { width: 50px; height: 50px; border-radius: 14px; }
+.brand .logo { width: 34px; height: 34px; }
+
+.count-pill { font-family: var(--sans); font-size: .62em; font-weight: 700; vertical-align: middle; margin-left: 8px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent-2); padding: 3px 10px; border-radius: 999px; }
+.count-pill b { font-variant-numeric: tabular-nums; }
+.search-bar { margin-bottom: 22px; }
+.search-bar input { width: 100%; font: inherit; padding: 13px 16px; border-radius: 999px; border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.search-bar input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+
+/* 설문(quiz) */
+.quiz { display: grid; gap: 16px; }
+.quiz-q { display: grid; gap: 7px; }
+.quiz-label { font-size: .92rem; font-weight: 700; }
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 7px; }
+.quiz-opts button { border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft);
+  border-radius: 10px; padding: 9px 14px; font-size: .86rem; font-weight: 600; transition: .15s; }
+.quiz-opts button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* 고민 맞춤 설계 블록 */
+.block.solution { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+.block.solution > h4 { color: var(--accent-2); }
+
+/* 괘선 그리기 애니메이션 */
+.hexline .ln.draw span { transform-origin: center; animation: lnDraw .5s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes lnDraw { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+
+/* 룬 돌 */
+.rune-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.rune-stone { text-align: center; min-width: 96px; padding: 16px 12px; border-radius: 16px;
+  background: linear-gradient(160deg, #4a3f6b, #241c3a); color: #ece4ff; box-shadow: 0 8px 22px rgba(20,12,40,.4);
+  animation: runeIn .6s cubic-bezier(.2,.8,.2,1) both; position: relative; overflow: hidden; }
+.rune-stone::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(231,180,90,.35), transparent 60%); animation: runeGlow 2.4s ease-in-out infinite; }
+.rune-stone.rev { transform: none; }
+.rune-stone .rune-glyph { font-size: 2.6rem; line-height: 1; color: #ffe0a3; text-shadow: 0 0 14px rgba(255,200,120,.7); position: relative; }
+.rune-stone.rev .rune-glyph { transform: rotate(180deg); }
+.rune-stone .rune-name { font-family: var(--serif); font-weight: 700; margin-top: 8px; font-size: .92rem; position: relative; }
+.rune-stone .rune-kw { font-size: .74rem; opacity: .8; margin-top: 2px; position: relative; }
+.rune-stone .pos { font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; margin-bottom: 4px; position: relative; }
+@keyframes runeIn { from { opacity: 0; transform: translateY(16px) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes runeGlow { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+/* 주사위 */
+.dice-wrap { display: flex; gap: 16px; justify-content: center; }
+.die-roll { width: 72px; height: 72px; animation: diceRoll .7s cubic-bezier(.2,.9,.3,1) both; }
+.die-roll svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 12px rgba(0,0,0,.25)); }
+@keyframes diceRoll { 0% { transform: translateY(-30px) rotate(-180deg) scale(.6); opacity: 0; } 60% { transform: translateY(4px) rotate(20deg) scale(1.05); opacity: 1; } 100% { transform: none; } }
+
+/* 카드 뒤집기 */
+.flip-card { perspective: 700px; animation: cardUp .5s ease both; }
+.flip-card .flip-inner { position: relative; transform-style: preserve-3d; animation: cardFlip .7s cubic-bezier(.4,.1,.2,1) both; animation-delay: inherit; min-height: 150px; }
+.flip-card .flip-back, .flip-card .flip-front { backface-visibility: hidden; position: absolute; inset: 0; }
+.flip-card .flip-back { display: grid; place-items: center; border-radius: 12px; background: linear-gradient(160deg, #2b3a67, #171c30); color: var(--accent); font-size: 1.6rem; border: 1px solid var(--line-strong); }
+.flip-card .flip-front { transform: rotateY(180deg); position: relative; }
+@keyframes cardFlip { from { transform: rotateY(0); } to { transform: rotateY(180deg); } }
+@keyframes cardUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.card-row .flip-card .card-face { min-height: 150px; }
+
+/* 오행 오브 */
+.orb-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: flex-end; padding: 8px 0; }
+.orb-item { text-align: center; animation: orbIn .6s ease both; }
+.orb { border-radius: 50%; margin: 0 auto 8px; animation: orbPulse 3s ease-in-out infinite; }
+.orb-lab { font-size: .8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+@keyframes orbIn { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes orbPulse { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* 황도 바퀴 */
+.wheel-wrap { display: grid; place-items: center; }
+.zwheel { width: 230px; max-width: 100%; animation: wheelSpin 1.4s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes wheelSpin { from { transform: rotate(-120deg); opacity: 0; } to { transform: rotate(0); opacity: 1; } }
+
+/* 지오맨시 형상 */
+.geo-fig { text-align: center; }
+.geo-dots { display: grid; gap: 7px; padding: 12px; }
+.geo-line { display: flex; gap: 12px; justify-content: center; }
+.geo-line .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); animation: orbIn .4s ease both; }
+.geo-name { font-family: var(--serif); font-weight: 700; margin-top: 6px; }
+.geo-lab { font-size: .72rem; color: var(--ink-faint); }
+
+/* 몬테카를로 히스토그램 */
+.histo { display: flex; align-items: flex-end; gap: 3px; height: 90px; padding-top: 6px; }
+.histo .hbar { flex: 1; background: linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius: 3px 3px 0 0; min-height: 2px;
+  animation: histGrow .6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes histGrow { from { height: 0 !important; } }
+
+/* 확률 막대 채우기 */
+.prob-band.fillw { width: 0; animation: fillBand .8s ease both; }
+@keyframes fillBand { to { width: var(--w); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .die-roll, .flip-card .flip-inner, .rune-stone, .orb-item, .orb, .zwheel, .histo .hbar, .hexline .ln.draw span, .prob-band.fillw, .flip-card { animation: none !important; }
+  .flip-card .flip-inner { transform: rotateY(180deg); }
+  .prob-band.fillw { width: var(--w); }
+}

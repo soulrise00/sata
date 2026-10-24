@@ -59,7 +59,31 @@
     };
   }
 
-  var api = { compute: compute, LR: LR };
+  // 몬테카를로(삼각분포)
+  function monte(input) {
+    var min = +input.min, mode = +input.mode, max = +input.max, target = +input.target;
+    if (isNaN(min) || isNaN(mode) || isNaN(max) || max <= min) return { error: '최소 < 예상 < 최대 순으로 숫자를 넣어 주세요.' };
+    if (isNaN(target)) target = mode;
+    var runs = 10000, samples = [], hitTarget = 0;
+    var fc = (mode - min) / (max - min);
+    for (var i = 0; i < runs; i++) {
+      var u = Math.random(), x;
+      if (u < fc) x = min + Math.sqrt(u * (max - min) * (mode - min));
+      else x = max - Math.sqrt((1 - u) * (max - min) * (max - mode));
+      samples.push(x);
+      if (x >= target) hitTarget++;
+    }
+    samples.sort(function (a, b) { return a - b; });
+    function pct(p) { return Math.round(samples[Math.floor(p * runs)]); }
+    // 히스토그램 20 bins
+    var bins = 20, counts = new Array(bins).fill(0);
+    samples.forEach(function (x) { var idx = Math.min(bins - 1, Math.floor((x - min) / (max - min) * bins)); counts[idx]++; });
+    var maxc = Math.max.apply(null, counts);
+    var hist = counts.map(function (c) { return Math.round(c / maxc * 100); });
+    return { runs: runs, p10: pct(0.1), p50: pct(0.5), p90: pct(0.9), prob: Math.round(hitTarget / runs * 100), target: target, hist: hist };
+  }
+
+  var api = { compute: compute, monte: monte, LR: LR };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.FL = root.FL || {}; root.FL.foresight = api;
 })(typeof window !== 'undefined' ? window : globalThis);

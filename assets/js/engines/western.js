@@ -50,7 +50,26 @@
     };
   }
 
-  var api = { compute: compute, SIGNS: SIGNS };
+  function moonSign(input) {
+    var tz = (input.tz == null) ? 9 : input.tz;
+    var jd = astro.julianDayUT(input.year, input.month, input.day, input.hour == null ? 12 : input.hour, input.minute || 0, tz);
+    var lon = astro.moonLongitude(jd);
+    var idx = Math.floor(lon / 30) % 12;
+    return { moonLon: lon, signIndex: idx, sign: SIGNS[idx], elemDesc: ELEM_DESC[SIGNS[idx].elem], modeDesc: MODE_DESC[SIGNS[idx].mode], hasTime: input.hour != null };
+  }
+
+  function ascendant(input) {
+    if (input.hour == null) return { hasTime: false };
+    var tz = (input.tz == null) ? 9 : input.tz;
+    var jd = astro.julianDayUT(input.year, input.month, input.day, input.hour, input.minute || 0, tz);
+    var sunLon = astro.sunLongitude(jd);
+    var sunSign = Math.floor(sunLon / 30);
+    var hoursSinceSunrise = ((input.hour + (input.minute || 0) / 60) - 6 + 24) % 24;
+    var idx = (sunSign + Math.round(hoursSinceSunrise / 2)) % 12;
+    return { hasTime: true, signIndex: idx, sign: SIGNS[idx] };
+  }
+
+  var api = { compute: compute, moonSign: moonSign, ascendant: ascendant, SIGNS: SIGNS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.FL = root.FL || {}; root.FL.western = api;
 })(typeof window !== 'undefined' ? window : globalThis);

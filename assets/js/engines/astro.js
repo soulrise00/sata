@@ -92,6 +92,57 @@
     return null;
   };
 
+  // ── 달 황경 (Meeus 47장 축약, 오차 ~0.3°) ─────────────────────
+  astro.moonLongitude = function (jd) {
+    var d = jd - 2451545.0;
+    var Lp = 218.3164477 + 13.17639648 * d;
+    var M = 357.5291 + 0.98560028 * d;       // 태양 평균근점이각
+    var Mp = 134.9634 + 13.06499295 * d;     // 달 평균근점이각
+    var D = 297.8502 + 12.19074912 * d;      // 평균이각
+    var F = 93.2721 + 13.22935024 * d;       // 위도인수
+    function s(x) { return Math.sin(x * DEG); }
+    var lon = Lp
+      + 6.289 * s(Mp)
+      + 1.274 * s(2 * D - Mp)
+      + 0.658 * s(2 * D)
+      + 0.214 * s(2 * Mp)
+      - 0.186 * s(M)
+      - 0.114 * s(2 * F)
+      + 0.059 * s(2 * D - 2 * Mp)
+      + 0.057 * s(2 * D - M - Mp)
+      + 0.053 * s(2 * D + Mp)
+      + 0.046 * s(2 * D - M)
+      - 0.041 * s(M - Mp);
+    lon = lon % 360; if (lon < 0) lon += 360;
+    return lon;
+  };
+
+  // 라히리 아야남샤(세차 보정) — 항성황도 변환용
+  astro.ayanamsaLahiri = function (jd) {
+    var yrs = (jd - 2451545.0) / 365.25;
+    return 23.853 + yrs * (50.2388 / 3600);
+  };
+  astro.toSidereal = function (tropicalLon, jd) {
+    var v = tropicalLon - astro.ayanamsaLahiri(jd);
+    v = v % 360; if (v < 0) v += 360; return v;
+  };
+
+  // 태양 적위 → 낮 길이(시간) 근사. lat: 위도(도)
+  astro.dayLength = function (jd, lat) {
+    var lon = astro.sunLongitude(jd);
+    var obliq = 23.4393 * DEG;
+    var decl = Math.asin(Math.sin(obliq) * Math.sin(lon * DEG)); // rad
+    var latr = (lat == null ? 37.5 : lat) * DEG;
+    var cosH = -Math.tan(latr) * Math.tan(decl);
+    cosH = Math.max(-1, Math.min(1, cosH));
+    var H = Math.acos(cosH); // rad, 반일주각
+    return 2 * H / Math.PI * 12; // 시간
+  };
+
+  // 요일별 지배행성(칼데안 순서). 0=일요일
+  astro.DAY_RULERS = ['태양', '달', '화성', '수성', '목성', '금성', '토성'];
+  astro.CHALDEAN = ['토성', '목성', '화성', '태양', '금성', '수성', '달']; // 느린→빠른
+
   // 환경 노출
   astro.DEG = DEG;
   if (typeof module !== 'undefined' && module.exports) module.exports = astro;
